@@ -25,8 +25,9 @@ class Storage:
    def get_unique_items_count(self):
         pass
 
+
 class Store(Storage):
-    def __init__(self, items):
+    def __init__(self):
         self.items = {}
         self.capacity = 100
 
@@ -53,6 +54,7 @@ class Store(Storage):
             else:
                 print(f"{name.title()} такого товара нет на складе")
                 is_found = True
+
     def get_free_space(self):
         return self.capacity - sum(self.items.values())
 
@@ -66,16 +68,21 @@ class Store(Storage):
 
 
 class Shop(Store):
-    def __init__(self, items, limit = 5):
+    def __init__(self, limit=5):
         super().__init__()
         self.capacity = 20
         self.limit = limit
+
+    @property
+    def get_item_limit(self):
+        return self.limit
 
     def add(self, name, count):
         if self.get_unique_items_count() < self.limit:
             super.add(name, count)
         else:
             print (f"Товар {name} не может быть добавлен")
+
 
 class Request:
     def __init__(self, str):
