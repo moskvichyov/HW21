@@ -28,6 +28,7 @@ class Storage:
 
 class Store(Storage):
     def __init__(self):
+        self.rusname = "Склад"
         self.items = {}
         self.capacity = 100
 
@@ -53,6 +54,7 @@ class Store(Storage):
                     print(f"Слишком мало {name}")
             else:
                 print(f"{name.title()} такого товара нет на складе")
+                break
                 is_found = True
 
     def get_free_space(self):
@@ -70,6 +72,7 @@ class Store(Storage):
 class Shop(Store):
     def __init__(self, limit=5):
         super().__init__()
+        self.rusname = "Магазин"
         self.capacity = 20
         self.limit = limit
 
@@ -79,7 +82,7 @@ class Shop(Store):
 
     def add(self, name, count):
         if self.get_unique_items_count() < self.limit:
-            super.add(name, count)
+            super().add(name, count)
         else:
             print (f"Товар {name} не может быть добавлен")
 
@@ -87,7 +90,7 @@ class Shop(Store):
 class Request:
     def __init__(self, str):
         lst = self.get_info(str)
-        self.from_ = lst[4]
+        self.from_ = lst[3]
         self.to = lst[6]
         self.amount = int(lst[1])
         self.product = lst[2]
